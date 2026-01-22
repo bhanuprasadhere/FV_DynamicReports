@@ -1,0 +1,12 @@
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\bin\Debug\net9.0\ReportingEngine.Core.deps.json
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\bin\Debug\net9.0\ReportingEngine.Core.dll
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\bin\Debug\net9.0\ReportingEngine.Core.pdb
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.AssemblyInfoInputs.cache
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.AssemblyInfo.cs
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.csproj.CoreCompileInputs.cache
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.dll
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\refint\ReportingEngine.Core.dll
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.pdb
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ref\ReportingEngine.Core.dll
+D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.Core\obj\Debug\net9.0\ReportingEngine.Core.sourcelink.json
