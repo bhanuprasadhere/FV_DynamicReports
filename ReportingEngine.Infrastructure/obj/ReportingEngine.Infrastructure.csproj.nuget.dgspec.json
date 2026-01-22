@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj": {}
+    "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Core\\ReportingEngine.Core.csproj": {
+    "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Core\\ReportingEngine.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Core\\ReportingEngine.Core.csproj",
+        "projectUniqueName": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Core\\ReportingEngine.Core.csproj",
         "projectName": "ReportingEngine.Core",
-        "projectPath": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Core\\ReportingEngine.Core.csproj",
+        "projectPath": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Core\\ReportingEngine.Core.csproj",
         "packagesPath": "C:\\Users\\bhanu\\.nuget\\packages\\",
-        "outputPath": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Core\\obj\\",
+        "outputPath": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj": {
+    "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj",
+        "projectUniqueName": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj",
         "projectName": "ReportingEngine.Infrastructure",
-        "projectPath": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj",
+        "projectPath": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Infrastructure\\ReportingEngine.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\bhanu\\.nuget\\packages\\",
-        "outputPath": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Infrastructure\\obj\\",
+        "outputPath": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Core\\ReportingEngine.Core.csproj": {
-                "projectPath": "D:\\AhaApps\\FirstVerify_Reporting_System\\ReportingEngine\\ReportingEngine.Core\\ReportingEngine.Core.csproj"
+              "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Core\\ReportingEngine.Core.csproj": {
+                "projectPath": "D:\\AhaApps\\FV_DynamicReports\\ReportingEngine.Core\\ReportingEngine.Core.csproj"
               }
             }
           }

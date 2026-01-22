@@ -156,3 +156,15 @@ D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.API\obj\
 D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.genruntimeconfig.cache
 D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.API\obj\Debug\net9.0\ref\ReportingEngine.API.dll
 D:\AhaApps\FirstVerify_Reporting_System\ReportingEngine\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.sourcelink.json
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.csproj.AssemblyReference.cache
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\rpswa.dswa.cache.json
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.AssemblyInfoInputs.cache
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.AssemblyInfo.cs
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.csproj.CoreCompileInputs.cache
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.MvcApplicationPartsAssemblyInfo.cs
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.MvcApplicationPartsAssemblyInfo.cache
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.sourcelink.json
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.dll
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\refint\ReportingEngine.API.dll
+D:\AhaApps\FV_DynamicReports\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.pdb
