@@ -10,7 +10,8 @@ var connectionString = @"Server=localhost\SQLEXPRESS;Database=pqFirstVerifyProdu
 
 // Add DB Context
 builder.Services.AddDbContext<ReportingDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.UseCompatibilityLevel(120)));
 
 // Add Services
 builder.Services.AddScoped<ITemplateService, TemplateService>();

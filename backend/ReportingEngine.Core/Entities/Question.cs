@@ -1,23 +1,46 @@
-namespace ReportingEngine.Core.Entities;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Question
+namespace ReportingEngine.Core.Entities
 {
-    public int QuestionId { get; set; }
-    public int TemplateSubSectionId { get; set; }
-    public string Text { get; set; } = string.Empty;
-    public string DataType { get; set; } = string.Empty;
-    public int? QuestionBankId { get; set; }
-    public bool IsActive { get; set; }
-    public int OrderNumber { get; set; }
+    [Table("Questions")]
+    public class Question
+    {
+        [Key]
+        [Column("QuestionID")]
+        public long QuestionId { get; set; }
 
-    // Metadata fields
-    public string? RiskLevel { get; set; } // "Low", "Medium", "High", "Critical"
-    public string? SafetyLevel { get; set; } // "Safe", "Warning", "Dangerous"
-    public string? Category { get; set; } // Question category/classification
-    public bool IsMandatory { get; set; } = false;
-    public string? Description { get; set; } // Additional context
+        [Column("QuestionText")] // Maps "Text" to "QuestionText"
+        public string Text { get; set; } = string.Empty;
 
-    // Navigation
-    public TemplateSubSection SubSection { get; set; } = null!;
+        [Column("SubSectionId")] // Maps "TemplateSubSectionId" to "SubSectionId"
+        public long TemplateSubSectionId { get; set; }
+
+        [Column("DisplayOrder")] // Maps "OrderNumber" to "DisplayOrder"
+        public int OrderNumber { get; set; }
+
+        [Column("Visible")] // Maps "IsActive" to "Visible"
+        public bool IsActive { get; set; }
+
+        public bool IsMandatory { get; set; }
+
+        public long? QuestionBankId { get; set; }
+
+        // --- PROPERTIES NOT IN DATABASE (Marked as NotMapped to prevent crash) ---
+        [NotMapped]
+        public string? Category { get; set; }
+        [NotMapped]
+        public string? DataType { get; set; }
+        [NotMapped]
+        public string? Description { get; set; }
+        [NotMapped]
+        public string? RiskLevel { get; set; }
+        [NotMapped]
+        public string? SafetyLevel { get; set; }
+
+        // --- Navigation Property ---
+        [ForeignKey("TemplateSubSectionId")]
+        public virtual TemplateSubSection? TemplateSubSection { get; set; }
+    }
 }
-

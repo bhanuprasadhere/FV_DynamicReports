@@ -1,14 +1,30 @@
-namespace ReportingEngine.Core.Entities;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class TemplateSubSection
+namespace ReportingEngine.Core.Entities
 {
-    public int TemplateSubSectionId { get; set; }
-    public int TemplateSectionId { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public int OrderNumber { get; set; }
-    public bool IsActive { get; set; }
+    [Table("TemplateSubSections")]
+    public class TemplateSubSection
+    {
+        [Key]
+        [Column("SubSectionID")]
+        public long TemplateSubSectionId { get; set; }
 
-    // Navigation
-    public TemplateSection Section { get; set; } = null!;
-    public ICollection<Question> Questions { get; set; } = new List<Question>();
+        [Column("SubSectionName")] // Maps "Name" to "SubSectionName"
+        public string Name { get; set; } = string.Empty;
+
+        [Column("DisplayOrder")] // Maps "OrderNumber" to "DisplayOrder"
+        public int OrderNumber { get; set; }
+
+        [Column("Visible")] // Maps "IsActive" to "Visible"
+        public bool IsActive { get; set; }
+
+        [Column("TemplateSectionID")]
+        public long TemplateSectionId { get; set; }
+
+        // --- Navigation Properties ---
+        [ForeignKey("TemplateSectionId")]
+        public virtual TemplateSection? TemplateSection { get; set; }
+    }
 }

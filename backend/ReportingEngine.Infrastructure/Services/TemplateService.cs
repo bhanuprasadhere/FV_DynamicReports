@@ -2,10 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using ReportingEngine.Core.DTOs;
 using ReportingEngine.Core.Interfaces;
 using ReportingEngine.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ReportingEngine.Infrastructure.Services
 {
@@ -20,63 +16,42 @@ namespace ReportingEngine.Infrastructure.Services
 
         public async Task<List<QuestionDto>> GetQuestionsForClientAsync(long clientId)
         {
-            // 1. Get Template IDs (GUIDs) linked to the Client
+            // 1. Get Template IDs for the client
             var templateIds = await _context.ClientTemplates
-                .Where(ct => ct.OrganizationId == clientId)
-                .Select(ct => ct.TemplateId)
+                .Where(c => c.OrganizationId == clientId)
+                .Select(c => c.TemplateId)
                 .ToListAsync();
 
             if (!templateIds.Any())
                 return new List<QuestionDto>();
 
-            // 2. Fetch Questions linked to these GUID Templates
+            // 2. Fetch questions using the CORRECT property names
             var questions = await _context.Questions
-                .Include(q => q.SubSection)
-                .ThenInclude(ss => ss.Section)
-                .ThenInclude(s => s.Template)
-                .Where(q => templateIds.Contains(q.SubSection.Section.TemplateId))
+                .Include(q => q.TemplateSubSection)
+                    .ThenInclude(ts => ts.TemplateSection)
+                        .ThenInclude(s => s.Template)
+                .Where(q => q.TemplateSubSection != null
+                         && q.TemplateSubSection.TemplateSection != null
+                         && templateIds.Contains(q.TemplateSubSection.TemplateSection.TemplateId))
                 .ToListAsync();
 
-            // 3. Grouping Logic
-            var finalQuestions = new List<QuestionDto>();
-
-            // Group by QuestionBankId (which is an int?)
-            var grouped = questions.GroupBy(q => q.QuestionBankId);
-
-            foreach (var group in grouped)
+            // 3. Map to DTO with Explicit Casting
+            var questionDtos = questions.Select(q => new QuestionDto
             {
-                // FIX: QuestionBankId is int?, so we check if it is not null and not 0
-                if (group.Key != null && group.Key != 0)
-                {
-                    // Case 1: Shared ID -> Distinct (Take First)
-                    var distinctQ = group.First();
-                    finalQuestions.Add(MapToDto(distinctQ));
-                }
-                else
-                {
-                    // Case 2: Null or 0 ID -> Unique (Take All)
-                    foreach (var q in group)
-                    {
-                        finalQuestions.Add(MapToDto(q));
-                    }
-                }
-            }
-
-            return finalQuestions;
-        }
-
-        private QuestionDto MapToDto(ReportingEngine.Core.Entities.Question q)
-        {
-            // Handle potentially null navigation properties safely
-            string category = q.SubSection?.Section?.Name ?? "General";
-
-            return new QuestionDto
-            {
-                Id = q.QuestionId,
+                Id = (int)q.QuestionId, // Cast long to int
                 Text = q.Text,
-                DataType = q.DataType,
-                SectionName = category
-            };
+                Type = "text", // Defaulting since DataType isn't in DB
+                Category = "General", // Defaulting
+                Required = q.IsMandatory,
+                Order = q.OrderNumber,
+
+                // Map Hierarchy IDs with Casting
+                SectionId = (int)(q.TemplateSubSection?.TemplateSection?.TemplateSectionId ?? 0),
+                SubSectionId = (int)(q.TemplateSubSectionId),
+                TemplateId = q.TemplateSubSection?.TemplateSection?.TemplateId.ToString() ?? ""
+            }).ToList();
+
+            return questionDtos;
         }
     }
 }
