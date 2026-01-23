@@ -16,7 +16,7 @@ public class TemplateService : ITemplateService
 
     public async Task<List<QuestionDto>> GetQuestionsForClientAsync(int clientId)
     {
-        // Step 1: Fetch the hierarchy
+        // Step 1: Fetch the hierarchy with eager loading
         var clientTemplate = await _context.ClientTemplates
             .Where(ct => ct.OrganizationId == clientId && ct.IsActive)
             .Include(ct => ct.Template)
@@ -31,7 +31,7 @@ public class TemplateService : ITemplateService
         var questions = new List<QuestionDto>();
         var template = clientTemplate.Template;
 
-        // Step 2: Flatten and group questions by QuestionBankId
+        // Step 2: Get all active questions
         var allQuestions = template.Sections
             .Where(s => s.IsActive)
             .SelectMany(s => s.SubSections)
@@ -40,29 +40,41 @@ public class TemplateService : ITemplateService
             .Where(q => q.IsActive)
             .ToList();
 
-        // Step 3: Apply the grouping logic
-        var questionsByBank = allQuestions
-            .GroupBy(q => q.QuestionBankId ?? -q.QuestionId) // Use negative ID as unique identifier for null banks
+        // Step 3: Get DISTINCT questions by QuestionBankId
+        // Group by QuestionBankId (or negative QuestionId for ungrouped questions)
+        var distinctGroups = allQuestions
+            .GroupBy(q => q.QuestionBankId ?? (-q.QuestionId)) // Use negative ID as unique identifier for null banks
             .ToList();
 
-        foreach (var group in questionsByBank)
+        // Step 4: Build DTO for each distinct question
+        foreach (var group in distinctGroups)
         {
-            var question = @group.First(); // Select the first question in the group (Distinct)
+            var question = group.First(); // Take first from group (they're the same question)
+
+            // Get the section information
             var section = template.Sections
                 .SelectMany(s => s.SubSections)
-                .First(ss => ss.TemplateSubSectionId == question.TemplateSubSectionId)
-                .Section;
+                .FirstOrDefault(ss => ss.TemplateSubSectionId == question.TemplateSubSectionId)
+                ?.Section;
 
-            questions.Add(new QuestionDto
+            var questionDto = new QuestionDto
             {
                 Id = question.QuestionId,
                 Text = question.Text,
                 DataType = question.DataType,
-                SectionName = section.Name,
-                Category = section.Name // Use Section name as category
-            });
+                SectionName = section?.Name ?? "Unknown Section",
+                Category = question.Category ?? section?.Name ?? "General",
+                RiskLevel = question.RiskLevel,
+                SafetyLevel = question.SafetyLevel,
+                IsMandatory = question.IsMandatory,
+                Description = question.Description,
+                QuestionBankId = question.QuestionBankId
+            };
+
+            questions.Add(questionDto);
         }
 
-        return questions;
+        // Sort by section and order number
+        return questions.OrderBy(q => q.SectionName).ThenBy(q => q.Id).ToList();
     }
 }

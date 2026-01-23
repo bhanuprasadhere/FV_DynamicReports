@@ -10,6 +10,11 @@ export interface Question {
   dataType: string;
   sectionName: string;
   category: string;
+  riskLevel?: string;
+  safetyLevel?: string;
+  isMandatory: boolean;
+  description?: string;
+  questionBankId?: number;
 }
 
 export interface SchemaResponse {
@@ -26,4 +31,13 @@ export interface DragItem {
 export interface DroppedItem extends DragItem {
   droppedId: string;
   position: number;
+}
+
+// Filters
+export interface QuestionFilters {
+  searchText: string;
+  riskLevel: string | null;
+  safetyLevel: string | null;
+  section: string | null;
+  isMandatoryOnly: boolean;
 }

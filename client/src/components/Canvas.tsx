@@ -1,12 +1,9 @@
 import React, { useMemo } from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import type { DroppedItem, Question } from '../types';
+import type { DroppedItem } from '../types';
 import { Trash2, Copy, GripVertical } from 'lucide-react';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import {
-  useSortable,
-  CSS,
-} from '@dnd-kit/sortable';
+import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface SortableDroppedItemProps {
   item: DroppedItem;
