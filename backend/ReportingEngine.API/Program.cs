@@ -5,39 +5,33 @@ using ReportingEngine.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+// --- THE NUCLEAR FIX: HARDCODED CONNECTION STRING ---
+var connectionString = @"Server=localhost\SQLEXPRESS;Database=pqFirstVerifyProduction;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true";
 
-// Add DbContext
-var connectionString = "Server=localhost;Database=pqFirstVerifyProduction;Trusted_Connection=True;TrustServerCertificate=True;";
+// Add DB Context
 builder.Services.AddDbContext<ReportingDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Register Services
+// Add Services
 builder.Services.AddScoped<ITemplateService, TemplateService>();
+builder.Services.AddControllers();
 
-// Add CORS for React frontend
+// Enable CORS for the Frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReact", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
+    options.AddPolicy("AllowReactApp",
+        policy => policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// (Swagger lines removed to fix build error)
 
-app.UseHttpsRedirection();
-app.UseCors("AllowReact");
+app.UseCors("AllowReactApp");
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

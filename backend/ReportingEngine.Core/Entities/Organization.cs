@@ -2,7 +2,7 @@ namespace ReportingEngine.Core.Entities;
 
 public class Organization
 {
-    public int OrganizationId { get; set; }
+    public long OrganizationId { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Code { get; set; } = string.Empty;
     public bool IsActive { get; set; }

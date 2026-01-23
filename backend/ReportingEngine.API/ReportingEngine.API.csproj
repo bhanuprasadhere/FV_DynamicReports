@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReportingEngine.Core\ReportingEngine.Core.csproj" />
     <ProjectReference Include="..\ReportingEngine.Infrastructure\ReportingEngine.Infrastructure.csproj" />
+    <ProjectReference Include="..\ReportingEngine.Core\ReportingEngine.Core.csproj" />
   </ItemGroup>
 
 </Project>

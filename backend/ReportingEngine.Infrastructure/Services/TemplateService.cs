@@ -2,79 +2,82 @@ using Microsoft.EntityFrameworkCore;
 using ReportingEngine.Core.DTOs;
 using ReportingEngine.Core.Interfaces;
 using ReportingEngine.Infrastructure.Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace ReportingEngine.Infrastructure.Services;
-
-public class TemplateService : ITemplateService
+namespace ReportingEngine.Infrastructure.Services
 {
-    private readonly ReportingDbContext _context;
-
-    public TemplateService(ReportingDbContext context)
+    public class TemplateService : ITemplateService
     {
-        _context = context;
-    }
+        private readonly ReportingDbContext _context;
 
-    public async Task<List<QuestionDto>> GetQuestionsForClientAsync(int clientId)
-    {
-        // Step 1: Fetch the hierarchy with eager loading
-        var clientTemplate = await _context.ClientTemplates
-            .Where(ct => ct.OrganizationId == clientId && ct.IsActive)
-            .Include(ct => ct.Template)
-            .ThenInclude(t => t.Sections)
-            .ThenInclude(ts => ts.SubSections)
-            .ThenInclude(tss => tss.Questions)
-            .FirstOrDefaultAsync();
-
-        if (clientTemplate == null)
-            return new List<QuestionDto>();
-
-        var questions = new List<QuestionDto>();
-        var template = clientTemplate.Template;
-
-        // Step 2: Get all active questions
-        var allQuestions = template.Sections
-            .Where(s => s.IsActive)
-            .SelectMany(s => s.SubSections)
-            .Where(ss => ss.IsActive)
-            .SelectMany(ss => ss.Questions)
-            .Where(q => q.IsActive)
-            .ToList();
-
-        // Step 3: Get DISTINCT questions by QuestionBankId
-        // Group by QuestionBankId (or negative QuestionId for ungrouped questions)
-        var distinctGroups = allQuestions
-            .GroupBy(q => q.QuestionBankId ?? (-q.QuestionId)) // Use negative ID as unique identifier for null banks
-            .ToList();
-
-        // Step 4: Build DTO for each distinct question
-        foreach (var group in distinctGroups)
+        public TemplateService(ReportingDbContext context)
         {
-            var question = group.First(); // Take first from group (they're the same question)
-
-            // Get the section information
-            var section = template.Sections
-                .SelectMany(s => s.SubSections)
-                .FirstOrDefault(ss => ss.TemplateSubSectionId == question.TemplateSubSectionId)
-                ?.Section;
-
-            var questionDto = new QuestionDto
-            {
-                Id = question.QuestionId,
-                Text = question.Text,
-                DataType = question.DataType,
-                SectionName = section?.Name ?? "Unknown Section",
-                Category = question.Category ?? section?.Name ?? "General",
-                RiskLevel = question.RiskLevel,
-                SafetyLevel = question.SafetyLevel,
-                IsMandatory = question.IsMandatory,
-                Description = question.Description,
-                QuestionBankId = question.QuestionBankId
-            };
-
-            questions.Add(questionDto);
+            _context = context;
         }
 
-        // Sort by section and order number
-        return questions.OrderBy(q => q.SectionName).ThenBy(q => q.Id).ToList();
+        public async Task<List<QuestionDto>> GetQuestionsForClientAsync(int clientId)
+        {
+            // 1. Get the Template IDs for this client
+            // FIX: Changed ct.ClientId to ct.OrganizationId based on your entity definition
+            var templateIds = await _context.ClientTemplates
+                .Where(ct => ct.OrganizationId == clientId)
+                .Select(ct => ct.TemplateId)
+                .ToListAsync();
+
+            // 2. Fetch the full hierarchy
+            var questions = await _context.Questions
+                .Include(q => q.SubSection)
+                .ThenInclude(ss => ss.Section)
+                .ThenInclude(s => s.Template)
+                .Where(q => templateIds.Contains(q.SubSection.Section.TemplateId))
+                .ToListAsync();
+
+            // 3. Apply the "Manager's Rule" (Grouping)
+            var finalQuestions = new List<QuestionDto>();
+
+            var grouped = questions.GroupBy(q => q.QuestionBankId);
+
+            foreach (var group in grouped)
+            {
+                // Group Key can be null if QuestionBankId is nullable
+                if (group.Key != null && group.Key != 0)
+                {
+                    // Case 1: Same QuestionBankId -> Take the FIRST one (Distinct)
+                    var distinctQ = group.First();
+                    finalQuestions.Add(MapToDto(distinctQ));
+                }
+                else
+                {
+                    // Case 2: No QuestionBankId (or 0/null) -> Take ALL of them
+                    foreach (var q in group)
+                    {
+                        finalQuestions.Add(MapToDto(q));
+                    }
+                }
+            }
+
+            return finalQuestions;
+        }
+
+        private QuestionDto MapToDto(ReportingEngine.Core.Entities.Question q)
+        {
+            // Safely handle null navigation properties just in case
+            string category = q.SubSection?.Section?.Name ?? "General";
+
+            return new QuestionDto
+            {
+                Id = q.QuestionId,
+
+                // FIX: Changed q.QuestionText to q.Text based on your entity definition
+                Text = q.Text,
+
+                // FIX: Changed q.QuestionType to q.DataType based on your entity definition
+                DataType = q.DataType,
+
+                SectionName = category
+            };
+        }
     }
 }
