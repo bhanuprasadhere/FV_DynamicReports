@@ -1,14 +1,27 @@
-namespace ReportingEngine.Core.Entities;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class ClientTemplate
+namespace ReportingEngine.Core.Entities
 {
-    public int ClientTemplateId { get; set; }
-    public int OrganizationId { get; set; }
-    public int TemplateId { get; set; }
-    public bool IsActive { get; set; }
-    public DateTime AssignedDate { get; set; }
+    public class ClientTemplate
+    {
+        [Key]
+        public int ClientTemplateId { get; set; }
 
-    // Navigation
-    public Organization Organization { get; set; } = null!;
-    public Template Template { get; set; } = null!;
+        // FIX 1: OrganizationId is bigint in DB -> long in C#
+        public long OrganizationId { get; set; }
+
+        // FIX 2: TemplateId is uniqueidentifier in DB -> Guid in C#
+        public Guid TemplateId { get; set; }
+
+        public bool IsActive { get; set; }
+
+        // FIX 3: Restored Navigation Properties (Solves the "Definition not found" error)
+        [ForeignKey("OrganizationId")]
+        public virtual Organization Organization { get; set; } = null!;
+
+        [ForeignKey("TemplateId")]
+        public virtual Template Template { get; set; } = null!;
+    }
 }

@@ -1,14 +1,22 @@
-namespace ReportingEngine.Core.Entities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-public class TemplateSection
+namespace ReportingEngine.Core.Entities
 {
-    public int TemplateSectionId { get; set; }
-    public int TemplateId { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public int OrderNumber { get; set; }
-    public bool IsActive { get; set; }
+    public class TemplateSection
+    {
+        [Key]
+        public int TemplateSectionId { get; set; }
 
-    // Navigation
-    public Template Template { get; set; } = null!;
-    public ICollection<TemplateSubSection> SubSections { get; set; } = new List<TemplateSubSection>();
+        // FIX: Must match Template.TemplateId (Guid)
+        public Guid TemplateId { get; set; }
+
+        public string Name { get; set; } = string.Empty;
+        public int Order { get; set; }
+
+        // Navigation
+        public virtual Template Template { get; set; } = null!;
+        public ICollection<TemplateSubSection> SubSections { get; set; } = new List<TemplateSubSection>();
+    }
 }
