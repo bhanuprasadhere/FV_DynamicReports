@@ -11,16 +11,15 @@ namespace ReportingEngine.Core.Entities
         [Column("TemplateSectionID")]
         public long TemplateSectionId { get; set; }
 
-        [Column("SectionName")] // Maps "Name" to "SectionName"
-        public string Name { get; set; } = string.Empty;
+        [Column("SectionName")]
+        public string? Name { get; set; } // Changed to string? (Nullable)
 
-        [Column("DisplayOrder")] // Maps "Order" to "DisplayOrder"
+        [Column("DisplayOrder")]
         public int Order { get; set; }
 
         [Column("TemplateID")]
         public Guid TemplateId { get; set; }
 
-        // --- Navigation Properties ---
         [ForeignKey("TemplateId")]
         public virtual Template? Template { get; set; }
     }

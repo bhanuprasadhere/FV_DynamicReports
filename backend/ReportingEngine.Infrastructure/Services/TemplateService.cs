@@ -25,31 +25,37 @@ namespace ReportingEngine.Infrastructure.Services
             if (!templateIds.Any())
                 return new List<QuestionDto>();
 
-            // 2. Fetch questions using the CORRECT property names
-            var questions = await _context.Questions
-                .Include(q => q.TemplateSubSection)
-                    .ThenInclude(ts => ts.TemplateSection)
-                        .ThenInclude(s => s.Template)
+            // 2. Fetch only necessary columns using Projection (.Select)
+            // This prevents fetching the entire tables and large text fields
+            var questionDtos = await _context.Questions
                 .Where(q => q.TemplateSubSection != null
                          && q.TemplateSubSection.TemplateSection != null
                          && templateIds.Contains(q.TemplateSubSection.TemplateSection.TemplateId))
+                .Select(q => new QuestionDto
+                {
+                    Id = (int)q.QuestionId,
+                    Text = q.Text ?? string.Empty,
+                    Type = "text",
+                    Category = "General",
+
+                    // Handle Nullable Boolean safely
+                    Required = q.IsMandatory ?? false,
+
+                    Order = q.OrderNumber,
+
+                    // Select IDs directly. EF Core generates efficient JOINS for these.
+                    // We use null-coalescing (?? 0) to handle potential nulls safely in C#
+                    SectionId = (int)(q.TemplateSubSection != null && q.TemplateSubSection.TemplateSection != null
+                        ? q.TemplateSubSection.TemplateSection.TemplateSectionId
+                        : 0),
+
+                    SubSectionId = (int)q.TemplateSubSectionId,
+
+                    TemplateId = (q.TemplateSubSection != null && q.TemplateSubSection.TemplateSection != null)
+                        ? q.TemplateSubSection.TemplateSection.TemplateId.ToString()
+                        : string.Empty
+                })
                 .ToListAsync();
-
-            // 3. Map to DTO with Explicit Casting
-            var questionDtos = questions.Select(q => new QuestionDto
-            {
-                Id = (int)q.QuestionId, // Cast long to int
-                Text = q.Text,
-                Type = "text", // Defaulting since DataType isn't in DB
-                Category = "General", // Defaulting
-                Required = q.IsMandatory,
-                Order = q.OrderNumber,
-
-                // Map Hierarchy IDs with Casting
-                SectionId = (int)(q.TemplateSubSection?.TemplateSection?.TemplateSectionId ?? 0),
-                SubSectionId = (int)(q.TemplateSubSectionId),
-                TemplateId = q.TemplateSubSection?.TemplateSection?.TemplateId.ToString() ?? ""
-            }).ToList();
 
             return questionDtos;
         }

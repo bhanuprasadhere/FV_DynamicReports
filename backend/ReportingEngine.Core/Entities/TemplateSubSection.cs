@@ -11,19 +11,19 @@ namespace ReportingEngine.Core.Entities
         [Column("SubSectionID")]
         public long TemplateSubSectionId { get; set; }
 
-        [Column("SubSectionName")] // Maps "Name" to "SubSectionName"
-        public string Name { get; set; } = string.Empty;
+        [Column("SubSectionName")]
+        public string? Name { get; set; }
 
-        [Column("DisplayOrder")] // Maps "OrderNumber" to "DisplayOrder"
+        [Column("DisplayOrder")]
         public int OrderNumber { get; set; }
 
-        [Column("Visible")] // Maps "IsActive" to "Visible"
-        public bool IsActive { get; set; }
+        // FIX: Changed to bool? because DB allows NULL for 'Visible' column
+        [Column("Visible")]
+        public bool? IsActive { get; set; }
 
         [Column("TemplateSectionID")]
         public long TemplateSectionId { get; set; }
 
-        // --- Navigation Properties ---
         [ForeignKey("TemplateSectionId")]
         public virtual TemplateSection? TemplateSection { get; set; }
     }
