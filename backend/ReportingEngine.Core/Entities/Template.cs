@@ -18,6 +18,9 @@ namespace ReportingEngine.Core.Entities
         [Column("TemplateNotes")]
         public string? Description { get; set; }
 
+        [Column("RiskLevel")]
+        public string? RiskLevel { get; set; }
+
         // --- Collections required by DbContext ---
         public virtual ICollection<TemplateSection> Sections { get; set; } = new List<TemplateSection>();
         public virtual ICollection<ClientTemplate> ClientTemplates { get; set; } = new List<ClientTemplate>();

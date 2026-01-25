@@ -16,48 +16,51 @@ namespace ReportingEngine.Infrastructure.Services
 
         public async Task<List<QuestionDto>> GetQuestionsForClientAsync(long clientId)
         {
-            // 1. Get Template IDs for the client
-            var templateIds = await _context.ClientTemplates
-                .Where(c => c.OrganizationId == clientId)
-                .Select(c => c.TemplateId)
-                .ToListAsync();
-
-            if (!templateIds.Any())
-                return new List<QuestionDto>();
-
-            // 2. Fetch only necessary columns using Projection (.Select)
-            // This prevents fetching the entire tables and large text fields
-            var questionDtos = await _context.Questions
+            // 1. Get all questions for client's prequalification templates (DisplayOrder = 1 only)
+            var questions = await _context.Questions
                 .Where(q => q.TemplateSubSection != null
                          && q.TemplateSubSection.TemplateSection != null
-                         && templateIds.Contains(q.TemplateSubSection.TemplateSection.TemplateId))
-                .Select(q => new QuestionDto
+                         && q.TemplateSubSection.TemplateSection.Template != null
+                         && q.TemplateSubSection.TemplateSection.Template.ClientTemplates
+                             .Any(ct => ct.OrganizationId == clientId 
+                                     && ct.DisplayOrder == 1  // ONLY Prequalification templates
+                                     && ct.Visible))
+                .Select(q => new 
                 {
-                    Id = (int)q.QuestionId,
+                    q.QuestionId,
                     Text = q.Text ?? string.Empty,
-                    Type = "text",
-                    Category = "General",
-
-                    // Handle Nullable Boolean safely
-                    Required = q.IsMandatory ?? false,
-
-                    Order = q.OrderNumber,
-
-                    // Select IDs directly. EF Core generates efficient JOINS for these.
-                    // We use null-coalescing (?? 0) to handle potential nulls safely in C#
-                    SectionId = (int)(q.TemplateSubSection != null && q.TemplateSubSection.TemplateSection != null
-                        ? q.TemplateSubSection.TemplateSection.TemplateSectionId
-                        : 0),
-
-                    SubSectionId = (int)q.TemplateSubSectionId,
-
-                    TemplateId = (q.TemplateSubSection != null && q.TemplateSubSection.TemplateSection != null)
-                        ? q.TemplateSubSection.TemplateSection.TemplateId.ToString()
-                        : string.Empty
+                    q.QuestionBankId,
+                    RiskLevel = q.TemplateSubSection!.TemplateSection!.Template!.RiskLevel,
+                    q.OrderNumber,
+                    q.IsMandatory
                 })
                 .ToListAsync();
 
-            return questionDtos;
+            // 2. Group by QuestionBankId to identify duplicates
+            var deduplicated = questions
+                .GroupBy(q => q.QuestionBankId)
+                .Select(g => new QuestionDto
+                {
+                    Id = (int)g.First().QuestionId,
+                    Text = g.First().Text,
+                    QuestionBankId = g.Key,
+                    IsDuplicate = g.Count() > 1,
+                    // Only show RiskLevel if question is unique (not duplicate)
+                    RiskLevel = g.Count() == 1 ? g.First().RiskLevel : null,
+                    Order = g.First().OrderNumber,
+                    
+                    // Legacy fields for backward compatibility
+                    Type = "text",
+                    Category = "General",
+                    Required = g.First().IsMandatory ?? false,
+                    SubSectionId = 0,
+                    SectionId = 0,
+                    TemplateId = string.Empty
+                })
+                .OrderBy(q => q.Order)
+                .ToList();
+
+            return deduplicated;
         }
     }
 }
