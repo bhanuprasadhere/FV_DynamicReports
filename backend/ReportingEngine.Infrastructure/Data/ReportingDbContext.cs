@@ -15,22 +15,15 @@ namespace ReportingEngine.Infrastructure.Data
         public DbSet<TemplateSection> TemplateSections { get; set; }
         public DbSet<TemplateSubSection> TemplateSubSections { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Prequalification> Prequalifications { get; set; }
+        public DbSet<PrequalificationUserInput> PrequalificationUserInputs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure ClientTemplate -> Organization
-            modelBuilder.Entity<ClientTemplate>()
-                .HasOne(ct => ct.Organization)
-                .WithMany()
-                .HasForeignKey(ct => ct.OrganizationId);
-
-            // Configure ClientTemplate -> Template
-            modelBuilder.Entity<ClientTemplate>()
-                .HasOne(ct => ct.Template)
-                .WithMany(t => t.ClientTemplates)
-                .HasForeignKey(ct => ct.TemplateId);
+            // NOTE: ClientTemplate relationships are configured via [ForeignKey] attributes
+            // Removing explicit configuration here to avoid shadow property conflicts
 
             // Configure TemplateSection -> Template
             modelBuilder.Entity<TemplateSection>()
@@ -46,9 +39,35 @@ namespace ReportingEngine.Infrastructure.Data
 
             // Configure Question -> TemplateSubSection
             modelBuilder.Entity<Question>()
-                .HasOne(q => q.TemplateSubSection) // Corrected Name
+                .HasOne(q => q.TemplateSubSection)
                 .WithMany()
                 .HasForeignKey(q => q.TemplateSubSectionId);
+
+            // Configure Prequalification -> Vendor (Organization)
+            modelBuilder.Entity<Prequalification>()
+                .HasOne(pq => pq.Vendor)
+                .WithMany()
+                .HasForeignKey(pq => pq.VendorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Configure Prequalification -> Client (Organization)
+            modelBuilder.Entity<Prequalification>()
+                .HasOne(pq => pq.Client)
+                .WithMany()
+                .HasForeignKey(pq => pq.ClientId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Configure Prequalification -> ClientTemplate
+            modelBuilder.Entity<Prequalification>()
+                .HasOne(pq => pq.ClientTemplate)
+                .WithMany()
+                .HasForeignKey(pq => pq.ClientTemplateId);
+
+            // Configure PrequalificationUserInput -> Prequalification
+            modelBuilder.Entity<PrequalificationUserInput>()
+                .HasOne(pui => pui.Prequalification)
+                .WithMany(pq => pq.UserInputs)
+                .HasForeignKey(pui => pui.PreQualificationId);
         }
     }
 }

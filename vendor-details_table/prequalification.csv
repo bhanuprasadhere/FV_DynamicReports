@@ -1,0 +1,250 @@
+﻿TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE,COLUMN_DEFAULT,KEY_TYPE,ORDINAL_POSITION
+dbo,CSIWebResponseDetails,CSIResponseRecID,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,CSIWebResponseDetails,RequestInvokedFrom,int,NULL,YES,NULL,,2
+dbo,CSIWebResponseDetails,VendorOrgId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,3
+dbo,CSIWebResponseDetails,ResponseNeededForID,bigint,NULL,YES,NULL,,4
+dbo,CSIWebResponseDetails,EntityID,bigint,NULL,YES,NULL,,5
+dbo,CSIWebResponseDetails,EntityNumber,bigint,NULL,YES,NULL,,6
+dbo,CSIWebResponseDetails,ElementNodeName,nvarchar,200,YES,NULL,,7
+dbo,CSIWebResponseDetails,ElementNodeValue,nvarchar,1500,YES,NULL,,8
+dbo,CSIWebResponseDetails,DeletedOn,datetime,NULL,YES,NULL,,9
+dbo,CSIWebResponseDetails,DeletedBy,uniqueidentifier,NULL,YES,NULL,,10
+dbo,EmployeeQuizAnswers-XXX Discard,QuizQuestAnsId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,EmployeeQuizAnswers-XXX Discard,QuestionId,bigint,NULL,NO,NULL,,2
+dbo,EmployeeQuizAnswers-XXX Discard,CorrectAnswer,nvarchar,500,YES,NULL,,3
+dbo,EmployeeQuizAnswers-XXX Discard,DeletedOn,datetime,NULL,YES,NULL,,4
+dbo,EmployeeQuizAnswers-XXX Discard,DeletedBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,OrganizationsPrequalificationOpenPeriod,OrgPrequalificationPeriodId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,OrganizationsPrequalificationOpenPeriod,VendorId,bigint,NULL,NO,NULL,FOREIGN KEY ? Organizations.OrganizationID,2
+dbo,OrganizationsPrequalificationOpenPeriod,PrequalificationPeriodStart,date,NULL,NO,NULL,,3
+dbo,OrganizationsPrequalificationOpenPeriod,PrequalificationPeriodClose,date,NULL,NO,NULL,,4
+dbo,OrganizationsPrequalificationOpenPeriod,PeriodStatus,int,NULL,NO,((0)),,5
+dbo,OrganizationsPrequalificationOpenPeriod,TotalPaymentRecieved,decimal,NULL,NO,NULL,,6
+dbo,OrganizationsPrequalificationOpenPeriod,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,OrganizationsPrequalificationOpenPeriod,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,Prequalification,PrequalificationId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,Prequalification,VendorId,bigint,NULL,NO,NULL,FOREIGN KEY ? Organizations.OrganizationID,2
+dbo,Prequalification,PrequalificationStatusId,bigint,NULL,NO,NULL,FOREIGN KEY ? PrequalificationStatus.PrequalificationStatusId,3
+dbo,Prequalification,ClientId,bigint,NULL,NO,NULL,FOREIGN KEY ? Organizations.OrganizationID,4
+dbo,Prequalification,UserIdAsCompleter,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,5
+dbo,Prequalification,UserIdAsSigner,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,6
+dbo,Prequalification,PrequalificationStart,datetime,NULL,NO,NULL,,7
+dbo,Prequalification,PrequalificationFinish,datetime,NULL,NO,NULL,,8
+dbo,Prequalification,PrequalificationCreate,datetime,NULL,NO,NULL,,9
+dbo,Prequalification,PrequalificationSubmit,datetime,NULL,YES,NULL,,10
+dbo,Prequalification,ClientTemplateId,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? ClientTemplates.ClientTemplateID,11
+dbo,Prequalification,OverridePayment-XXX,bit,NULL,YES,NULL,,12
+dbo,Prequalification,OverirdeAmount-XXX,decimal,NULL,YES,NULL,,13
+dbo,Prequalification,PaymentReceived,bit,NULL,YES,NULL,,14
+dbo,Prequalification,UserIdLoggedIn,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,15
+dbo,Prequalification,RequestForMoreInfo,bit,NULL,YES,NULL,,16
+dbo,Prequalification,TotalPaymentReceivedAmount,decimal,NULL,YES,NULL,,17
+dbo,Prequalification,PaymentReceivedDateXXX,datetime,NULL,YES,NULL,,18
+dbo,Prequalification,PaymentTransactionIdXXX,nvarchar,100,YES,NULL,,19
+dbo,Prequalification,TransactionMetaDataXXX,nvarchar,3000,YES,NULL,,20
+dbo,Prequalification,TotalAnnualFeeAmount,decimal,NULL,YES,NULL,,21
+dbo,Prequalification,TotalAnnualFeeReceived,decimal,NULL,YES,NULL,,22
+dbo,Prequalification,TotalInvoiceAmount,decimal,NULL,YES,NULL,,23
+dbo,Prequalification,PersonCompletingName,nvarchar,200,YES,NULL,,24
+dbo,Prequalification,PersonCompletingTitle,nvarchar,200,YES,NULL,,25
+dbo,Prequalification,locked,bit,NULL,YES,NULL,,26
+dbo,Prequalification,UnlockedBy,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,27
+dbo,Prequalification,UnlockedDate,datetime,NULL,YES,NULL,,28
+dbo,Prequalification,Comments,nvarchar,500,YES,NULL,,29
+dbo,Prequalification,BlockClientDocsSelection,bit,NULL,NO,((1)),,30
+dbo,Prequalification,CanMigrate,bit,NULL,YES,NULL,,31
+dbo,Prequalification,InvitationFrom,int,NULL,YES,NULL,,32
+dbo,Prequalification,InvitationSentByUser,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,33
+dbo,Prequalification,InvitationId,uniqueidentifier,NULL,YES,NULL,,34
+dbo,Prequalification,IsMigrated,bit,NULL,NO,((0)),,35
+dbo,Prequalification,DeletedOn,datetime,NULL,YES,NULL,,36
+dbo,Prequalification,DeletedBy,uniqueidentifier,NULL,YES,NULL,,37
+dbo,Prequalification,AuditStatusId,int,NULL,YES,NULL,,38
+dbo,Prequalification,AdminUserAssignedOn,datetime,NULL,YES,NULL,,39
+dbo,Prequalification,AdminUserAssignedBy,uniqueidentifier,NULL,YES,NULL,,40
+dbo,Prequalification,AdminUserAssignmentUpdatedOn,datetime,NULL,YES,NULL,,41
+dbo,Prequalification,AdminUserAssignmentUpdatedBy,uniqueidentifier,NULL,YES,NULL,,42
+dbo,Prequalification,SourcePqId,bigint,NULL,YES,NULL,,43
+dbo,PrequalificationClient,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationClient,PQId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationClient,Region,nvarchar,-1,YES,NULL,,3
+dbo,PrequalificationClient,ClientIds,nvarchar,500,YES,NULL,,4
+dbo,PrequalificationClient,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,PrequalificationClient,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6
+dbo,PrequalificationComments,CommentsRecordId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationComments,PrequalificationId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationComments,TemplateSectionID,bigint,NULL,YES,NULL,FOREIGN KEY ? TemplateSections.TemplateSectionID,3
+dbo,PrequalificationComments,SubSectionID,bigint,NULL,YES,NULL,FOREIGN KEY ? TemplateSubSections.SubSectionID,4
+dbo,PrequalificationComments,Comments,nvarchar,500,YES,NULL,,5
+dbo,PrequalificationComments,CommentsBy,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,6
+dbo,PrequalificationComments,CommentsDate,date,NULL,YES,NULL,,7
+dbo,PrequalificationComments,CommentsTime,time,NULL,YES,NULL,,8
+dbo,PrequalificationComments,DeletedOn,datetime,NULL,YES,NULL,,9
+dbo,PrequalificationComments,DeletedBy,uniqueidentifier,NULL,YES,NULL,,10
+dbo,PrequalificationCompletedSections,PrequalCompletedId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationCompletedSections,PrequalificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationCompletedSections,TemplateSectionId,bigint,NULL,NO,NULL,FOREIGN KEY ? TemplateSections.TemplateSectionID,3
+dbo,PrequalificationCompletedSections,SubmittedDate,datetime,NULL,YES,NULL,,4
+dbo,PrequalificationCompletedSections,SubmittedBy,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,5
+dbo,PrequalificationCompletedSections,DeletedOn,datetime,NULL,YES,NULL,,6
+dbo,PrequalificationCompletedSections,DeletedBy,uniqueidentifier,NULL,YES,NULL,,7
+dbo,PrequalificationCompletedSubSections,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationCompletedSubSections,PrequalificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationCompletedSubSections,SubSectionId,bigint,NULL,NO,NULL,FOREIGN KEY ? TemplateSubSections.SubSectionID,3
+dbo,PrequalificationCompletedSubSections,SubmittedDate,datetime,NULL,YES,NULL,,4
+dbo,PrequalificationCompletedSubSections,SubmittedBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,PrequalificationCompletedSubSections,SectionId,bigint,NULL,NO,NULL,,6
+dbo,PrequalificationCompletedSubSections,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,PrequalificationCompletedSubSections,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,PrequalificationDocuments,DocumentId,uniqueidentifier,NULL,NO,(newid()),PRIMARY KEY,1
+dbo,PrequalificationDocuments,PQId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationDocuments,ClientId,bigint,NULL,NO,NULL,,3
+dbo,PrequalificationDocuments,UploadedBy,uniqueidentifier,NULL,NO,NULL,FOREIGN KEY ? SystemUsers.UserId,4
+dbo,PrequalificationDocuments,UploadedDate,datetime,NULL,NO,NULL,,5
+dbo,PrequalificationDocuments,DocumentName,nvarchar,250,NO,NULL,,6
+dbo,PrequalificationDocuments,Status,int,NULL,NO,NULL,,7
+dbo,PrequalificationDocuments,DeletedOn,datetime,NULL,YES,NULL,,8
+dbo,PrequalificationDocuments,DeletedBy,uniqueidentifier,NULL,YES,NULL,,9
+dbo,PrequalificationEMRStatsValues,PrequalEMRStatsValuesId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationEMRStatsValues,PrequalEMRStatsYearId,bigint,NULL,NO,NULL,FOREIGN KEY ? PrequalificationEMRStatsYears.PrequalEMRStatsYearId,2
+dbo,PrequalificationEMRStatsValues,QuestionId,bigint,NULL,NO,NULL,FOREIGN KEY ? Questions.QuestionID,3
+dbo,PrequalificationEMRStatsValues,QuestionBankId,bigint,NULL,YES,NULL,,4
+dbo,PrequalificationEMRStatsValues,QuestionColumnId,bigint,NULL,NO,NULL,FOREIGN KEY ? QuestionColumnDetails.QuestionColumnId,5
+dbo,PrequalificationEMRStatsValues,QuestionColumnIdValue,nvarchar,150,NO,NULL,,6
+dbo,PrequalificationEMRStatsValues,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,PrequalificationEMRStatsValues,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,PrequalificationEMRStatsYears,PrequalEMRStatsYearId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationEMRStatsYears,RecordTypeValues,int,NULL,YES,NULL,,2
+dbo,PrequalificationEMRStatsYears,PrequalificationId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,3
+dbo,PrequalificationEMRStatsYears,EMRStatsYear,nvarchar,20,YES,NULL,,4
+dbo,PrequalificationEMRStatsYears,ColumnNo,int,NULL,YES,NULL,,5
+dbo,PrequalificationEMRStatsYears,DeletedOn,datetime,NULL,YES,NULL,,6
+dbo,PrequalificationEMRStatsYears,DeletedBy,uniqueidentifier,NULL,YES,NULL,,7
+dbo,PrequalificationNotifications,PrequaliNotificationId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationNotifications,PrequalificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationNotifications,TemplateSubSectionNotificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? TemplateSubSectionsNotifications.TemplateSubSectionNotificationId,3
+dbo,PrequalificationNotifications,NotificationDateTime,datetime,NULL,NO,NULL,,4
+dbo,PrequalificationNotifications,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,PrequalificationNotifications,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6
+dbo,PrequalificationPayments,PrequalificationPaymentsId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationPayments,PrequalificationId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationPayments,InvoiceAmount,decimal,NULL,YES,NULL,,3
+dbo,PrequalificationPayments,PaymentReceivedAmount,decimal,NULL,YES,NULL,,4
+dbo,PrequalificationPayments,PaymentReceivedDate,datetime,NULL,YES,NULL,,5
+dbo,PrequalificationPayments,PaymentTransactionId,nvarchar,100,YES,NULL,,6
+dbo,PrequalificationPayments,TransactionMetaData,nvarchar,3000,YES,NULL,,7
+dbo,PrequalificationPayments,SkipPayment,bit,NULL,YES,NULL,,8
+dbo,PrequalificationPayments,PaymentCategory,int,NULL,YES,NULL,,9
+dbo,PrequalificationPayments,DeletedOn,datetime,NULL,YES,NULL,,10
+dbo,PrequalificationPayments,DeletedBy,uniqueidentifier,NULL,YES,NULL,,11
+dbo,PrequalificationQuestion,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationQuestion,PQId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationQuestion,QuestionText,nvarchar,100,YES,NULL,,3
+dbo,PrequalificationQuestion,QuestionType,bigint,NULL,NO,NULL,FOREIGN KEY ? QuestionControlType.QuestionTypeID,4
+dbo,PrequalificationQuestion,QuestionInputValue,nvarchar,150,YES,NULL,,5
+dbo,PrequalificationQuestion,PQSubSectionId,bigint,NULL,NO,NULL,FOREIGN KEY ? PrequalificationSubsection.Id,6
+dbo,PrequalificationQuestion,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,PrequalificationQuestion,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,PrequalificationReportingData,PrequalificationRepDataId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationReportingData,PrequalificationId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationReportingData,ClientId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,3
+dbo,PrequalificationReportingData,VendorId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,4
+dbo,PrequalificationReportingData,ReportingType,int,NULL,YES,NULL,,5
+dbo,PrequalificationReportingData,ReportingDataId,bigint,NULL,YES,NULL,,6
+dbo,PrequalificationReportingData,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,PrequalificationReportingData,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,PrequalificationSectionsToDisplay,DisplayId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationSectionsToDisplay,PrequalificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationSectionsToDisplay,TemplateSectionId,bigint,NULL,NO,NULL,FOREIGN KEY ? TemplateSections.TemplateSectionID,3
+dbo,PrequalificationSectionsToDisplay,Visible,bit,NULL,YES,NULL,,4
+dbo,PrequalificationSectionsToDisplay,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,PrequalificationSectionsToDisplay,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6
+dbo,PrequalificationSites,PrequalificationSitesId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationSites,PrequalificationId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationSites,ClientId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,3
+dbo,PrequalificationSites,VendorId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,4
+dbo,PrequalificationSites,ClientBULocation,nvarchar,50,YES,NULL,,5
+dbo,PrequalificationSites,ClientBusinessUnitId,bigint,NULL,YES,NULL,FOREIGN KEY ? ClientBusinessUnits.ClientBusinessUnitId,6
+dbo,PrequalificationSites,ClientBusinessUnitSiteId,bigint,NULL,YES,NULL,FOREIGN KEY ? ClientBusinessUnitSites.ClientBusinessUnitSiteId,7
+dbo,PrequalificationSites,Comment,nvarchar,500,YES,NULL,,8
+dbo,PrequalificationSites,PrequalificationPaymentsId,bigint,NULL,YES,NULL,FOREIGN KEY ? PrequalificationPayments.PrequalificationPaymentsId,9
+dbo,PrequalificationSites,PrequalificationStatusId,bigint,NULL,YES,NULL,FOREIGN KEY ? PrequalificationStatus.PrequalificationStatusId,10
+dbo,PrequalificationSites,PQSiteStatus,bigint,NULL,YES,NULL,,11
+dbo,PrequalificationSites,DeletedOn,datetime,NULL,YES,NULL,,12
+dbo,PrequalificationSites,DeletedBy,uniqueidentifier,NULL,YES,NULL,,13
+dbo,PrequalificationSites,SourcePqSiteId,bigint,NULL,YES,NULL,,14
+dbo,PrequalificationStatus,PrequalificationStatusId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationStatus,PrequalificationStatusName,varchar,50,NO,NULL,,2
+dbo,PrequalificationStatus,Color,varchar,13,NO,NULL,,3
+dbo,PrequalificationStatus,IndicationTextAdmin,varchar,50,YES,NULL,,4
+dbo,PrequalificationStatus,IndicationTextClient,varchar,50,YES,NULL,,5
+dbo,PrequalificationStatus,IndicationTextVendor,varchar,50,YES,NULL,,6
+dbo,PrequalificationStatus,PeriodLength,int,NULL,NO,NULL,,7
+dbo,PrequalificationStatus,PeriodLengthUnit,nvarchar,1,NO,NULL,,8
+dbo,PrequalificationStatus,Description,nvarchar,200,NO,NULL,,9
+dbo,PrequalificationStatus,PredefinedComments,nvarchar,250,YES,NULL,,10
+dbo,PrequalificationStatus,ShowInDashBoard,bit,NULL,YES,NULL,,11
+dbo,PrequalificationStatus,BannerColor,varchar,20,YES,NULL,,12
+dbo,PrequalificationStatus,DisplayOrder,int,NULL,YES,NULL,,13
+dbo,PrequalificationStatus,DeletedOn,datetime,NULL,YES,NULL,,14
+dbo,PrequalificationStatus,DeletedBy,uniqueidentifier,NULL,YES,NULL,,15
+dbo,PrequalificationStatusChangeLog,PrequalStatusLogId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationStatusChangeLog,PrequalificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationStatusChangeLog,PrequalificationStatusId,bigint,NULL,NO,NULL,FOREIGN KEY ? PrequalificationStatus.PrequalificationStatusId,3
+dbo,PrequalificationStatusChangeLog,StatusChangeDate,datetime,NULL,NO,NULL,,4
+dbo,PrequalificationStatusChangeLog,StatusChangedByUser,uniqueidentifier,NULL,NO,NULL,FOREIGN KEY ? SystemUsers.UserId,5
+dbo,PrequalificationStatusChangeLog,PrequalificationStart,datetime,NULL,NO,NULL,,6
+dbo,PrequalificationStatusChangeLog,PrequalificationFinish,datetime,NULL,NO,NULL,,7
+dbo,PrequalificationStatusChangeLog,Comments,nvarchar,500,YES,NULL,,8
+dbo,PrequalificationStatusChangeLog,CreatedDate,datetime,NULL,YES,NULL,,9
+dbo,PrequalificationStatusChangeLog,DeletedOn,datetime,NULL,YES,NULL,,10
+dbo,PrequalificationStatusChangeLog,DeletedBy,uniqueidentifier,NULL,YES,NULL,,11
+dbo,PrequalificationStatusChangeLog,SourcePqStatusLogId,bigint,NULL,YES,NULL,,12
+dbo,PrequalificationSubsection,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationSubsection,PQId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationSubsection,SubSectionName,nvarchar,100,YES,NULL,,3
+dbo,PrequalificationSubsection,SubSectionHeader,nvarchar,-1,YES,NULL,,4
+dbo,PrequalificationSubsection,SubSectionFooter,nvarchar,500,YES,NULL,,5
+dbo,PrequalificationSubsection,VisibleToVendor,bit,NULL,NO,NULL,,6
+dbo,PrequalificationSubsection,CreatedBy,uniqueidentifier,NULL,YES,NULL,,7
+dbo,PrequalificationSubsection,CreatedDate,datetime,NULL,YES,NULL,,8
+dbo,PrequalificationSubsection,SubSectionId,bigint,NULL,YES,NULL,,9
+dbo,PrequalificationSubsection,GroupNumber,bigint,NULL,NO,NULL,,10
+dbo,PrequalificationSubsection,Order,int,NULL,NO,NULL,,11
+dbo,PrequalificationSubsection,SubSectionType,nvarchar,50,YES,NULL,,12
+dbo,PrequalificationSubsection,DeletedOn,datetime,NULL,YES,NULL,,13
+dbo,PrequalificationSubsection,DeletedBy,uniqueidentifier,NULL,YES,NULL,,14
+dbo,PrequalificationTrainingAnnualFees,PreqAnnualFeeRecId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationTrainingAnnualFees,PrequalificationId,bigint,NULL,YES,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,PrequalificationTrainingAnnualFees,ClientTemplateBUGroupId,bigint,NULL,YES,NULL,FOREIGN KEY ? ClientTemplatesBUGroupPrice.ClientTemplateBUGroupId,3
+dbo,PrequalificationTrainingAnnualFees,ClientTemplateForBUId,bigint,NULL,YES,NULL,FOREIGN KEY ? ClientTemplatesForBU.ClientTemplateForBUId,4
+dbo,PrequalificationTrainingAnnualFees,AnnualFeeAmount,decimal,NULL,YES,NULL,,5
+dbo,PrequalificationTrainingAnnualFees,AnnualFeeReceivedAmount,decimal,NULL,YES,NULL,,6
+dbo,PrequalificationTrainingAnnualFees,FeeReceivedDate,datetime,NULL,YES,NULL,,7
+dbo,PrequalificationTrainingAnnualFees,FeeTransactionId,nvarchar,100,YES,NULL,,8
+dbo,PrequalificationTrainingAnnualFees,FeeTransactionMetaData,nvarchar,3000,YES,NULL,,9
+dbo,PrequalificationTrainingAnnualFees,SkipPayment,bit,NULL,YES,NULL,,10
+dbo,PrequalificationTrainingAnnualFees,DeletedOn,datetime,NULL,YES,NULL,,11
+dbo,PrequalificationTrainingAnnualFees,DeletedBy,uniqueidentifier,NULL,YES,NULL,,12
+dbo,PrequalificationUserInput,PreQualRecId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,PrequalificationUserInput,PreQualificationId,bigint,NULL,NO,NULL,,2
+dbo,PrequalificationUserInput,QuestionColumnId,bigint,NULL,NO,NULL,FOREIGN KEY ? QuestionColumnDetails.QuestionColumnId,3
+dbo,PrequalificationUserInput,UserInput,nvarchar,3500,YES,NULL,,4
+dbo,PrequalificationUserInput,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,PrequalificationUserInput,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6
+dbo,PrequalificationUserInput,ValidationStatus,int,NULL,YES,NULL,,7
+dbo,PrequalificationUserInput,ExtractedDataId,int,NULL,YES,NULL,,8
+dbo,PrequalificationUserInputLog,Id,bigint,NULL,NO,NULL,,1
+dbo,PrequalificationUserInputLog,PreQualificationId,bigint,NULL,NO,NULL,,2
+dbo,PrequalificationUserInputLog,QuestionColumnId,nchar,10,NO,NULL,,3
+dbo,PrequalificationUserInputLog,UserInput,nvarchar,3500,YES,NULL,,4
+dbo,PrequalificationUserInputLog,ChangedBy,uniqueidentifier,NULL,NO,NULL,,5
+dbo,PrequalificationUserInputLog,ChangedDate,datetime,NULL,YES,NULL,,6
+dbo,PrequalificationUserInputLog,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,PrequalificationUserInputLog,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,VendorReviewInputAnswers,VendorRevInputAnsId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorReviewInputAnswers,VendorReviewInputId,bigint,NULL,YES,NULL,FOREIGN KEY ? VendorReviewInput.VendorReviewInputId,2
+dbo,VendorReviewInputAnswers,VendorReviewQuestionId,bigint,NULL,YES,NULL,,3
+dbo,VendorReviewInputAnswers,InputValue,nvarchar,50,YES,NULL,,4
+dbo,VendorReviewInputAnswers,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,VendorReviewInputAnswers,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6

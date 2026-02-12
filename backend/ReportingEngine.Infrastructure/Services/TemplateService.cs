@@ -45,7 +45,7 @@ namespace ReportingEngine.Infrastructure.Services
                     Text = g.First().Text,
                     QuestionBankId = g.Key,
                     IsDuplicate = g.Count() > 1,
-                    // Only show RiskLevel if question is unique (not duplicate)
+                    // CORRECTED LOGIC: Only show RiskLevel if question is unique (not duplicate)
                     RiskLevel = g.Count() == 1 ? g.First().RiskLevel : null,
                     Order = g.First().OrderNumber,
                     
@@ -57,7 +57,7 @@ namespace ReportingEngine.Infrastructure.Services
                     SectionId = 0,
                     TemplateId = string.Empty
                 })
-                .OrderBy(q => q.Order)
+                .OrderBy(q => q.QuestionBankId)
                 .ToList();
 
             return deduplicated;

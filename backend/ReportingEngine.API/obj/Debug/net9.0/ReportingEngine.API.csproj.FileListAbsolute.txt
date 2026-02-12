@@ -153,3 +153,16 @@ D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\obj\Debug\net9.0\refint
 D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.pdb
 D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.genruntimeconfig.cache
 D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\obj\Debug\net9.0\ref\ReportingEngine.API.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\Microsoft.OpenApi.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\obj\Debug\net9.0\ReportingEngine.API.MvcApplicationPartsAssemblyInfo.cs
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\ClosedXML.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\ClosedXML.Parser.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\DocumentFormat.OpenXml.Framework.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\ExcelNumberFormat.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\RBush.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\SixLabors.Fonts.dll
+D:\AhaApps\FV_DynamicReports\backend\ReportingEngine.API\bin\Debug\net9.0\System.IO.Packaging.dll

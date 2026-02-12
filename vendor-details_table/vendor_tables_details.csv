@@ -1,0 +1,203 @@
+﻿TABLE_SCHEMA,TABLE_NAME,COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE,COLUMN_DEFAULT,KEY_TYPE,ORDINAL_POSITION
+dbo,BBCTempVendors,SAPVendor,varchar,50,YES,NULL,,1
+dbo,BBCTempVendors,VendorName,varchar,500,NO,NULL,,2
+dbo,BBCTempVendors,DeletedOn,datetime,NULL,YES,NULL,,3
+dbo,BBCTempVendors,DeletedBy,uniqueidentifier,NULL,YES,NULL,,4
+dbo,ClientVendorEmployeeRegistration,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,ClientVendorEmployeeRegistration,ClientId,bigint,NULL,NO,NULL,FOREIGN KEY ? Organizations.OrganizationID,2
+dbo,ClientVendorEmployeeRegistration,VendorId,bigint,NULL,NO,NULL,,3
+dbo,ClientVendorEmployeeRegistration,DeletedOn,datetime,NULL,YES,NULL,,4
+dbo,ClientVendorEmployeeRegistration,DeletedBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,ClientVendorProperties,ClientVendorPropertiesId,int,NULL,NO,NULL,,1
+dbo,ClientVendorProperties,ClientID,bigint,NULL,NO,NULL,,2
+dbo,ClientVendorProperties,VendorID,bigint,NULL,NO,NULL,,3
+dbo,ClientVendorProperties,TrainingPaymentExempt,bit,NULL,YES,NULL,,4
+dbo,ClientVendorProperties,CreateDate,datetime,NULL,NO,NULL,,5
+dbo,ClientVendorProperties,DeletedOn,datetime,NULL,YES,NULL,,6
+dbo,ClientVendorProperties,DeletedBy,uniqueidentifier,NULL,YES,NULL,,7
+dbo,ClientVendorReferenceIds,ClientVendorRecId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,ClientVendorReferenceIds,ClientId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,2
+dbo,ClientVendorReferenceIds,VendorId,bigint,NULL,YES,NULL,FOREIGN KEY ? Organizations.OrganizationID,3
+dbo,ClientVendorReferenceIds,ClientVendorReferenceId,varchar,50,YES,NULL,,4
+dbo,ClientVendorReferenceIds,ClientContractId,bigint,NULL,YES,NULL,,5
+dbo,ClientVendorReferenceIds,DeletedOn,datetime,NULL,YES,NULL,,6
+dbo,ClientVendorReferenceIds,DeletedBy,uniqueidentifier,NULL,YES,NULL,,7
+dbo,ForVendorStatusUpdate,VendorName,nvarchar,500,NO,NULL,,1
+dbo,ForVendorStatusUpdate,VendorId,bigint,NULL,YES,NULL,,2
+dbo,ForVendorStatusUpdate,PrequalificationId,bigint,NULL,YES,NULL,,3
+dbo,ForVendorStatusUpdate,DeletedOn,datetime,NULL,YES,NULL,,4
+dbo,ForVendorStatusUpdate,DeletedBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,Report_Clayco_Vendors_To_Processing,Name,nvarchar,200,YES,NULL,,1
+dbo,Report_Clayco_Vendors_To_Processing,PrequalificationStart,datetime,NULL,NO,NULL,,2
+dbo,Report_Clayco_Vendors_To_Processing,PrequalificationFinish,datetime,NULL,NO,NULL,,3
+dbo,Report_Clayco_Vendors_To_Processing,PrequalificationStatusName,varchar,50,NO,NULL,,4
+dbo,Report_Clayco_Vendors_To_Processing,PrequalificationId,bigint,NULL,YES,NULL,,5
+dbo,Report_Clayco_Vendors_To_Processing,Minority Business:,nvarchar,3500,YES,NULL,,6
+dbo,Report_Clayco_Vendors_To_Processing,Business qualifies as a Disadvantaged Business Enterprise (DBE):,nvarchar,3500,YES,NULL,,7
+dbo,Report_Clayco_Vendors_To_Processing,DBE Provide certification number:,nvarchar,3500,YES,NULL,,8
+dbo,Report_Clayco_Vendors_To_Processing,Business qualifies as a Minority Business Enterprise (MBE):,nvarchar,3500,YES,NULL,,9
+dbo,Report_Clayco_Vendors_To_Processing,MBE Provide certification number:,nvarchar,3500,YES,NULL,,10
+dbo,Report_Clayco_Vendors_To_Processing,Business qualifies as a Small Business Enterprise (SBE):,nvarchar,3500,YES,NULL,,11
+dbo,Report_Clayco_Vendors_To_Processing,SBE Provide certification number:,nvarchar,3500,YES,NULL,,12
+dbo,Report_Clayco_Vendors_To_Processing,Business qualifies as a Women''s Business Enterprise (WBE):,nvarchar,3500,YES,NULL,,13
+dbo,Report_Clayco_Vendors_To_Processing,WBE Provide certification number:,nvarchar,3500,YES,NULL,,14
+dbo,Report_Clayco_Vendors_To_Processing,Pending,int,NULL,YES,NULL,,15
+dbo,Report_Clayco_Vendors_To_Processing,Pending-Renewal,int,NULL,YES,NULL,,16
+dbo,Report_Clayco_Vendors_To_Processing,Processing,int,NULL,YES,NULL,,17
+dbo,Report_Clayco_Vendors_To_Processing,Processing StatusChangeDate,datetime,NULL,YES,NULL,,18
+dbo,Report_Clayco_Vendors_To_Processing,Pending StatusChangeDate,datetime,NULL,YES,NULL,,19
+dbo,Report_Clayco_Vendors_To_Processing,Pending-Renewal StatusChangeDate,datetime,NULL,YES,NULL,,20
+dbo,Report_Clayco_Vendors_To_Processing,PaymentReceivedDate,datetime,NULL,YES,NULL,,21
+dbo,Report_Clayco_Vendors_To_Processing,PaymentReceivedAmount,decimal,NULL,YES,NULL,,22
+dbo,Report_Clayco_Vendors_To_Processing,VendorId,bigint,NULL,YES,NULL,,23
+dbo,Report_Clayco_Vendors_To_Processing,ClientId,bigint,NULL,YES,NULL,,24
+dbo,Report_Vendor_Activity,ClientTemplateId,uniqueidentifier,NULL,YES,NULL,,1
+dbo,Report_Vendor_Activity,Vendor,nvarchar,200,YES,NULL,,2
+dbo,Report_Vendor_Activity,Client,nvarchar,200,YES,NULL,,3
+dbo,Report_Vendor_Activity,PrequalificationStart,datetime,NULL,NO,NULL,,4
+dbo,Report_Vendor_Activity,StatusChangeDate,datetime,NULL,NO,NULL,,5
+dbo,Report_Vendor_Activity,ChangedBy,varchar,202,YES,NULL,,6
+dbo,Report_Vendor_Activity,PrequalificationStatusName,varchar,50,NO,NULL,,7
+dbo,Report_Vendor_Activity,StatusIdleTime,int,NULL,YES,NULL,,8
+dbo,Report_Vendor_Activity,StatusOrder,int,NULL,NO,NULL,,9
+dbo,Report_Vendor_Activity,AccountManager,varchar,201,YES,NULL,,10
+dbo,Report_Vendor_Activity,TemplateCode,nvarchar,10,YES,NULL,,11
+dbo,Report_Vendor_Activity,ClientId,bigint,NULL,YES,NULL,,12
+dbo,Report_Vendor_Activity,VendorId,bigint,NULL,YES,NULL,,13
+dbo,Report_Vendor_by_Manager,Account Manager,varchar,201,NO,NULL,,1
+dbo,Report_Vendor_by_Manager,PrequalificationId,bigint,NULL,NO,NULL,,2
+dbo,Report_Vendor_by_Manager,TemplateCode,nvarchar,10,YES,NULL,,3
+dbo,Report_Vendor_by_Manager,Vendor,nvarchar,200,YES,NULL,,4
+dbo,Report_Vendor_by_Manager,Client,nvarchar,200,YES,NULL,,5
+dbo,Report_Vendor_by_Manager,Status,varchar,50,NO,NULL,,6
+dbo,Report_Vendor_by_Manager,PrequalificationStart,datetime,NULL,NO,NULL,,7
+dbo,Report_Vendor_by_Manager,PrequalificationEnd,datetime,NULL,NO,NULL,,8
+dbo,Report_Vendor_by_Manager,PhoneNumber,nvarchar,100,YES,NULL,,9
+dbo,Report_Vendor_by_Manager,ClientId,bigint,NULL,YES,NULL,,10
+dbo,Report_Vendor_by_Manager,VendorId,bigint,NULL,YES,NULL,,11
+dbo,StateCodeVendorRestrictionList,StateCodeVendorRestrictionListID,int,NULL,NO,NULL,PRIMARY KEY,1
+dbo,StateCodeVendorRestrictionList,StatesID,bigint,NULL,NO,NULL,FOREIGN KEY ? States.StatesId,2
+dbo,StateCodeVendorRestrictionList,VendorID,int,NULL,NO,NULL,,3
+dbo,StateCodeVendorRestrictionList,DeletedOn,datetime,NULL,YES,NULL,,4
+dbo,StateCodeVendorRestrictionList,DeletedBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,TempVendorIds,VendorId,nvarchar,50,YES,NULL,,1
+dbo,TempVendorIds,Name,nvarchar,500,YES,NULL,,2
+dbo,TempVendorIds,DeletedOn,datetime,NULL,YES,NULL,,3
+dbo,TempVendorIds,DeletedBy,uniqueidentifier,NULL,YES,NULL,,4
+dbo,VendorDetailQuestions,ID,int,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorDetailQuestions,TemplateId,uniqueidentifier,NULL,NO,NULL,,2
+dbo,VendorDetailQuestions,QuestionId,bigint,NULL,YES,NULL,,3
+dbo,VendorDetailQuestions,Type,int,NULL,NO,((0)),,4
+dbo,VendorDetailQuestions,Value,decimal,NULL,YES,NULL,,5
+dbo,VendorDetailQuestions,IsMax,bit,NULL,YES,NULL,,6
+dbo,VendorDetailQuestions,DeletedOn,datetime,NULL,YES,NULL,,7
+dbo,VendorDetailQuestions,DeletedBy,uniqueidentifier,NULL,YES,NULL,,8
+dbo,VendorDetails,VendorDetailsId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorDetails,PrequalificationId,bigint,NULL,NO,NULL,FOREIGN KEY ? Prequalification.PrequalificationId,2
+dbo,VendorDetails,FullName,nvarchar,150,YES,NULL,,3
+dbo,VendorDetails,Title,nvarchar,150,YES,NULL,,4
+dbo,VendorDetails,EmailAddress,nvarchar,150,YES,NULL,,5
+dbo,VendorDetails,TelephoneNumber,nvarchar,150,YES,NULL,,6
+dbo,VendorDetails,GroupNumber,bigint,NULL,YES,NULL,,7
+dbo,VendorDetails,DeletedOn,datetime,NULL,YES,NULL,,8
+dbo,VendorDetails,DeletedBy,uniqueidentifier,NULL,YES,NULL,,9
+dbo,VendorEmailLog,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorEmailLog,UserId,uniqueidentifier,NULL,NO,NULL,,2
+dbo,VendorEmailLog,PQId,bigint,NULL,NO,NULL,,3
+dbo,VendorEmailLog,ToAddress,nvarchar,500,NO,NULL,,4
+dbo,VendorEmailLog,CCAddress,nvarchar,-1,YES,NULL,,5
+dbo,VendorEmailLog,BCCAddress,nvarchar,-1,YES,NULL,,6
+dbo,VendorEmailLog,Body,nvarchar,-1,YES,NULL,,7
+dbo,VendorEmailLog,EmailStatus,bit,NULL,NO,NULL,,8
+dbo,VendorEmailLog,SendDate,datetime,NULL,NO,NULL,,9
+dbo,VendorEmailLog,DeletedOn,datetime,NULL,YES,NULL,,10
+dbo,VendorEmailLog,DeletedBy,uniqueidentifier,NULL,YES,NULL,,11
+dbo,VendorInviteDetails,InvitationId,uniqueidentifier,NULL,NO,(newid()),PRIMARY KEY,1
+dbo,VendorInviteDetails,VendorEmail,nvarchar,256,NO,NULL,,2
+dbo,VendorInviteDetails,VendorCompanyName,nvarchar,250,NO,NULL,,3
+dbo,VendorInviteDetails,VendorFirstName,nvarchar,50,NO,(N'nv'),,4
+dbo,VendorInviteDetails,VendorLastName,nvarchar,50,NO,NULL,,5
+dbo,VendorInviteDetails,ClientId,bigint,NULL,NO,NULL,,6
+dbo,VendorInviteDetails,ClientCode,nvarchar,50,NO,NULL,,7
+dbo,VendorInviteDetails,VendorValidated,bit,NULL,YES,NULL,,8
+dbo,VendorInviteDetails,Address1,nvarchar,200,YES,NULL,,9
+dbo,VendorInviteDetails,Address2,nvarchar,200,YES,NULL,,10
+dbo,VendorInviteDetails,Address3,nvarchar,200,YES,NULL,,11
+dbo,VendorInviteDetails,City,nvarchar,200,YES,NULL,,12
+dbo,VendorInviteDetails,State,nvarchar,200,YES,NULL,,13
+dbo,VendorInviteDetails,Zip,nvarchar,20,YES,NULL,,14
+dbo,VendorInviteDetails,Country,nvarchar,100,YES,NULL,,15
+dbo,VendorInviteDetails,InvitationDate,datetime,NULL,NO,NULL,,16
+dbo,VendorInviteDetails,NotificationRecordExist,bit,NULL,YES,NULL,,17
+dbo,VendorInviteDetails,IgnoredInvitation,bit,NULL,YES,NULL,,18
+dbo,VendorInviteDetails,NotificationReferenceId,bigint,NULL,NO,NULL,,19
+dbo,VendorInviteDetails,InvitationSentFrom,int,NULL,YES,NULL,,20
+dbo,VendorInviteDetails,InvitationSentByUser,uniqueidentifier,NULL,YES,NULL,FOREIGN KEY ? SystemUsers.UserId,21
+dbo,VendorInviteDetails,ShowOnDashboard,bit,NULL,YES,NULL,,22
+dbo,VendorInviteDetails,RiskLevel,varchar,50,YES,NULL,,23
+dbo,VendorInviteDetails,comments,varchar,1024,YES,NULL,,24
+dbo,VendorInviteDetails,ClientBusinessUnitSiteId,bigint,NULL,YES,NULL,,25
+dbo,VendorInviteDetails,InvitationType,int,NULL,YES,NULL,,26
+dbo,VendorInviteDetails,VendorId,bigint,NULL,YES,NULL,,27
+dbo,VendorInviteDetails,PQId,bigint,NULL,YES,NULL,,28
+dbo,VendorInviteDetails,SendBcc,nvarchar,500,YES,NULL,,29
+dbo,VendorInviteDetails,SendCc,nvarchar,500,YES,NULL,,30
+dbo,VendorInviteDetails,InvitationCode,nvarchar,50,YES,NULL,,31
+dbo,VendorInviteDetails,LanguageId,bigint,NULL,YES,NULL,,32
+dbo,VendorInviteDetails,CcSendTo,nvarchar,500,YES,NULL,,33
+dbo,VendorInviteDetails,BccSendTo,nvarchar,500,YES,NULL,,34
+dbo,VendorInviteDetails,DeletedOn,datetime,NULL,YES,NULL,,35
+dbo,VendorInviteDetails,DeletedBy,uniqueidentifier,NULL,YES,NULL,,36
+dbo,VendorInviteLocations,VendorInviteLocationId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorInviteLocations,InvitationId,uniqueidentifier,NULL,NO,NULL,FOREIGN KEY ? VendorInviteDetails.InvitationId,2
+dbo,VendorInviteLocations,ClientBusinessUnitSiteID,bigint,NULL,NO,NULL,,3
+dbo,VendorInviteLocations,DeletedOn,datetime,NULL,YES,NULL,,4
+dbo,VendorInviteLocations,DeletedBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,VendorReviewInput,VendorReviewInputId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorReviewInput,VendorId,bigint,NULL,NO,NULL,FOREIGN KEY ? Organizations.OrganizationID,2
+dbo,VendorReviewInput,InputUserId,uniqueidentifier,NULL,NO,NULL,FOREIGN KEY ? SystemUsers.UserId,3
+dbo,VendorReviewInput,UserReviewNumber,int,NULL,NO,NULL,,4
+dbo,VendorReviewInput,ReviewType,int,NULL,YES,NULL,,5
+dbo,VendorReviewInput,ReviewDate,datetime,NULL,YES,NULL,,6
+dbo,VendorReviewInput,ProjectName,nvarchar,500,YES,NULL,,7
+dbo,VendorReviewInput,ProjectLocation,nvarchar,500,YES,NULL,,8
+dbo,VendorReviewInput,ContractWONumber,nvarchar,500,YES,NULL,,9
+dbo,VendorReviewInput,UserRating,decimal,NULL,YES,NULL,,10
+dbo,VendorReviewInput,DoYouRecommend,bit,NULL,YES,NULL,,11
+dbo,VendorReviewInput,Comments,nvarchar,500,YES,NULL,,12
+dbo,VendorReviewInput,ClientId,bigint,NULL,YES,NULL,,13
+dbo,VendorReviewInput,PrequalificationID,bigint,NULL,YES,NULL,,14
+dbo,VendorReviewInput,BUID,bigint,NULL,YES,NULL,,15
+dbo,VendorReviewInput,DeletedOn,datetime,NULL,YES,NULL,,16
+dbo,VendorReviewInput,DeletedBy,uniqueidentifier,NULL,YES,NULL,,17
+dbo,VendorReviewInputAnswers,VendorRevInputAnsId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorReviewInputAnswers,VendorReviewInputId,bigint,NULL,YES,NULL,FOREIGN KEY ? VendorReviewInput.VendorReviewInputId,2
+dbo,VendorReviewInputAnswers,VendorReviewQuestionId,bigint,NULL,YES,NULL,,3
+dbo,VendorReviewInputAnswers,InputValue,nvarchar,50,YES,NULL,,4
+dbo,VendorReviewInputAnswers,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,VendorReviewInputAnswers,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6
+dbo,VendorReviewInputSection3Ans,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorReviewInputSection3Ans,VendorReviewInputId,bigint,NULL,NO,NULL,FOREIGN KEY ? VendorReviewInput.VendorReviewInputId,2
+dbo,VendorReviewInputSection3Ans,Section3QuestionId,bigint,NULL,NO,NULL,FOREIGN KEY ? VendorReviewQuestionsForSection3.Id,3
+dbo,VendorReviewInputSection3Ans,Answer,nvarchar,-1,YES,NULL,,4
+dbo,VendorReviewInputSection3Ans,FilledBy,uniqueidentifier,NULL,YES,NULL,,5
+dbo,VendorReviewInputSection3Ans,DeletedOn,datetime,NULL,YES,NULL,,6
+dbo,VendorReviewInputSection3Ans,DeletedBy,uniqueidentifier,NULL,YES,NULL,,7
+dbo,VendorReviewQuestions,VendorReviewQuestionId,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorReviewQuestions,QuestionString,nvarchar,500,NO,NULL,,2
+dbo,VendorReviewQuestions,QisMandatory,bit,NULL,YES,NULL,,3
+dbo,VendorReviewQuestions,ClientID,int,NULL,YES,NULL,,4
+dbo,VendorReviewQuestions,DeletedOn,datetime,NULL,YES,NULL,,5
+dbo,VendorReviewQuestions,DeletedBy,uniqueidentifier,NULL,YES,NULL,,6
+dbo,VendorReviewQuestionsForSection3,Id,bigint,NULL,NO,NULL,PRIMARY KEY,1
+dbo,VendorReviewQuestionsForSection3,SectionHeader,nvarchar,500,YES,NULL,,2
+dbo,VendorReviewQuestionsForSection3,HasQuestion,bit,NULL,NO,NULL,,3
+dbo,VendorReviewQuestionsForSection3,QuestionText,nvarchar,-1,YES,NULL,,4
+dbo,VendorReviewQuestionsForSection3,QuestionTypeID,bigint,NULL,YES,NULL,FOREIGN KEY ? QuestionControlType.QuestionTypeID,5
+dbo,VendorReviewQuestionsForSection3,Options,nvarchar,500,YES,NULL,,6
+dbo,VendorReviewQuestionsForSection3,ClientId,bigint,NULL,NO,NULL,FOREIGN KEY ? Organizations.OrganizationID,7
+dbo,VendorReviewQuestionsForSection3,Order,int,NULL,NO,NULL,,8
+dbo,VendorReviewQuestionsForSection3,Group,int,NULL,YES,NULL,,9
+dbo,VendorReviewQuestionsForSection3,IsRating,bit,NULL,YES,NULL,,10
+dbo,VendorReviewQuestionsForSection3,DeletedOn,datetime,NULL,YES,NULL,,11
+dbo,VendorReviewQuestionsForSection3,DeletedBy,uniqueidentifier,NULL,YES,NULL,,12
